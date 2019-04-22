@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DeAcero</string>
+    <string name="Logo">Logo</string>
+    <string name="Login">Login</string>
 </resources>
