@@ -4,17 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="horizontal"
+    android:visibility="visible"
     tools:context=".Login">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="134dp"
-        android:contentDescription="@string/Login"
-        android:text="@string/Login"
-        android:textSize="36sp"
+    <ImageView
+        android:id="@+id/logoImg"
+        android:layout_width="212dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="66dp"
+        android:contentDescription="@string/Logo"
+        app:layout_constraintBottom_toTopOf="@+id/userText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/logoblack" />
+
+    <EditText
+        android:id="@+id/userText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:ems="10"
+        android:hint="@string/NombreUsuario"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/passwordText"
+        app:layout_constraintEnd_toEndOf="@+id/logoImg"
+        app:layout_constraintTop_toBottomOf="@+id/logoImg" />
+
+    <EditText
+        android:id="@+id/passwordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:ems="10"
+        android:hint="@string/ContraseñaTxt"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/userText"
+        app:layout_constraintTop_toBottomOf="@+id/userText" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button2"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="194dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="84dp"
+        android:background="@color/colorAccent"
+        android:text="@string/EntrarText"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="44dp"
+        android:background="#4c516d"
+        app:layout_constraintBottom_toTopOf="@+id/logoImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#4c516d"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2">
+
+    </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>
