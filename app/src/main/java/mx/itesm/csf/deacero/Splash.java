@@ -21,7 +21,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
 
                 finish();
-                Intent intentoPrincipal = new Intent().setClass(Splash.this, Menu_Graficas.class);
+                Intent intentoPrincipal = new Intent().setClass(Splash.this, Login.class);
                 startActivity(intentoPrincipal);
             }
         };
