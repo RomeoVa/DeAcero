@@ -1,5 +1,6 @@
 package mx.itesm.csf.deacero;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,15 +16,76 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.EntryXComparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
 public class Menu_Graficas extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "menu_graficas";
+
+
+
+    private LineChart mChart;
+    private BarChart barChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__graficas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        mChart = (LineChart) findViewById(R.id.chart);
+        //mChart.setOnChartValueSelectedListener(Menu_Graficas.this);
+
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(false);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+
+        yValues.add(new Entry(0,60));
+        yValues.add(new Entry(1,50));
+        yValues.add(new Entry(2,70));
+        yValues.add(new Entry(3,30));
+        yValues.add(new Entry(4,50));
+        yValues.add(new Entry(5,60));
+        yValues.add(new Entry(6,650));
+
+        LineDataSet set1 = new LineDataSet(yValues,"Data Set 1");
+
+        set1.setFillAlpha(110);
+
+        set1.setColor(Color.RED);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+
+        LineData data = new LineData(dataSets);
+
+        mChart.setData(data);
+
+
 
 
 
@@ -82,6 +144,28 @@ public class Menu_Graficas extends AppCompatActivity
 
             toast1.show();
         } else if (id == R.id.nav_gallery) {
+
+            barChart = (BarChart) findViewById(R.id.barchart);
+            List<BarEntry> entries = new ArrayList<>();
+            entries.add(new BarEntry(0f, 30f));
+            entries.add(new BarEntry(1f, 80f));
+            entries.add(new BarEntry(2f, 60f));
+            entries.add(new BarEntry(3f, 50f));
+            // gap of 2f
+            entries.add(new BarEntry(5f, 70f));
+            entries.add(new BarEntry(6f, 60f));
+
+            BarDataSet set = new BarDataSet(entries, "BarDataSet");
+
+
+            BarData data = new BarData(set);
+            data.setBarWidth(0.9f); // set custom bar width
+            barChart.setData(data);
+            barChart.setFitBars(true); // make the x-axis fit exactly all bars
+            barChart.invalidate(); // refresh
+
+            barChart.setData(data);
+
 
         } else if (id == R.id.nav_slideshow) {
 

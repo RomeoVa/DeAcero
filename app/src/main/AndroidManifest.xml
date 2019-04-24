@@ -9,16 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Test"></activity>
         <activity
             android:name=".Menu_Graficas"
             android:label="@string/title_activity_menu__graficas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Login"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-
-            />
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".Splash"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
