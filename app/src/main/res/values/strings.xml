@@ -14,4 +14,9 @@
     <string name="EntrarText">Entrar</string>
     <string name="NombreUsuario">Nombre de Usuario</string>
     <string name="ContraseñaTxt">Contraseña</string>
+    <string name="ProduccionMerma">Producción/Merma</string>
+    <string name="Dia">Por día</string>
+    <string name="Mes">Por mes</string>
+    <string name="Producción">Producción</string>
+    <string name="Merma">Merma</string>
 </resources>
