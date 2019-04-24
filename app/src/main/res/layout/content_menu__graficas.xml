@@ -10,12 +10,86 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="287dp"
-        android:layout_height="102dp"
-        android:layout_marginTop="238dp"
-        android:text="TextView"
-        android:textSize="50sp"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:fontFamily="serif"
+        android:text="@string/ProduccionMerma"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="222dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/produccion" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="95dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.433">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="94dp"
+            android:layout_height="48dp"
+            android:text="@string/Dia"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="511dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="94dp"
+            android:layout_height="43dp"
+            android:text="@string/Mes"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="559dp" />
+    </RadioGroup>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="80dp"
+        android:text="@string/Producción"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="112dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/Merma"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1"
+        app:layout_constraintVertical_bias="0.218" />
+
 </android.support.constraint.ConstraintLayout>
