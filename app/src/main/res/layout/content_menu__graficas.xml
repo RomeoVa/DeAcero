@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Contenedor"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-<com.github.mikephil.charting.charts.LineChart
-    android:id="@+id/chart"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barchart"
+    <EditText
+        android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
+        android:layout_height="match_parent"
+        android:ems="12"
+        android:inputType="textPersonName"
+        android:text="Romeo"
+        android:textSize="30sp" />
 </RelativeLayout>

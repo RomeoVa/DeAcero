@@ -6,21 +6,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Producción en Toneladas" />
+            android:id="@+id/Produccion"
+            android:icon="@drawable/grafica"
+            android:title="Producción" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Producción en Horas" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/Mantenimiento"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Mantenimiento" />
+        <item
+            android:id="@+id/Energia"
+            android:icon="@drawable/energia"
+            android:title="Energía" />
     </group>
 
     <item android:title="Communicate">

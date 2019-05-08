@@ -19,4 +19,7 @@
     <string name="Mes">Por mes</string>
     <string name="Producción">Producción</string>
     <string name="Merma">Merma</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
