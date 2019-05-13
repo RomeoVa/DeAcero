@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -42,7 +44,8 @@ import java.util.List;
 
 
 public class Menu_Graficas extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,Produccion.OnFragmentInteractionListener,Mantenimiento.OnFragmentInteractionListener,Energia.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,Produccion.OnFragmentInteractionListener,Mantenimiento.OnFragmentInteractionListener,
+        Energia.OnFragmentInteractionListener,Inicio.OnFragmentInteractionListener {
 
     private static final String TAG = "menu_graficas";
 
@@ -52,15 +55,14 @@ public class Menu_Graficas extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menu__graficas);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.Contenedor, new Inicio())
+                .commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,6 +72,7 @@ public class Menu_Graficas extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -113,7 +116,11 @@ public class Menu_Graficas extends AppCompatActivity
         Fragment fragment = null;
         Boolean FragmentoSeleccionado  = false;
 
-        if (id == R.id.Produccion) {
+        if(id == R.id.Inicio){
+            fragment = new Inicio();
+            FragmentoSeleccionado = true;
+        }
+        else if (id == R.id.Produccion) {
             fragment = new Produccion();
             FragmentoSeleccionado = true;
             // Handle the camera action
@@ -130,6 +137,7 @@ public class Menu_Graficas extends AppCompatActivity
         } else if (id == R.id.Energia) {
             fragment = new Energia();
             FragmentoSeleccionado = true;
+
         }else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

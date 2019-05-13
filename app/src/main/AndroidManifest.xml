@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.itesm.csf.deacero">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,7 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Test"></activity>
+        <activity android:name=".Prueba"></activity>
+        <activity android:name=".Heavy4" />
+        <activity android:name=".Heavy3_4" />
+        <activity android:name=".Menos2Heavy" />
+        <activity android:name=".NoFerrosaLight" />
+        <activity android:name=".Mas2Heavy" />
+        <activity android:name=".FerrosaTramp" />
+        <activity android:name=".Principal" />
+        <activity android:name=".Entrada" />
+        <activity android:name=".Test" />
         <activity
             android:name=".Menu_Graficas"
             android:label="@string/title_activity_menu__graficas"

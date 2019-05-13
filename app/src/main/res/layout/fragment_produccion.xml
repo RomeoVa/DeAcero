@@ -1,19 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Produccion">
-
+    <!--
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </com.github.mikephil.charting.charts.LineChart>
+    -->
+
+    <Button
+        android:id="@+id/Entrada"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:text="Entrada"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/FerrosaTramp"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginTop="180dp"
+        android:text="FerrosaTramp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Mas2Heavy"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginTop="360dp"
+        android:text="Mas2Heavy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Heavy4"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginTop="540dp"
+        android:text="Heavy4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Principal"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="212dp"
+        android:text="Principal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/NoFerrosaLight"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="176dp"
+        android:text="NoFerrosaLight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Menos2Heavy"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="360dp"
+        android:text="Menos2Heavy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Heavy_3_4"
+        android:layout_width="215dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="540dp"
+        android:text="3/4Heavy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+</RelativeLayout>

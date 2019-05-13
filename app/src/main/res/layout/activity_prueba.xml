@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".Test">
+    tools:context=".Prueba">
 
     <TextView
         android:id="@+id/text_view_result"
@@ -21,6 +20,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="29dp"
-        android:text="parse" />
+        android:text="parse"/>
 
 </RelativeLayout>

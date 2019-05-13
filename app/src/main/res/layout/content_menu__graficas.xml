@@ -4,15 +4,4 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:ems="12"
-        android:inputType="textPersonName"
-        android:text="Romeo"
-        android:textSize="30sp" />
-</RelativeLayout>
+    android:layout_height="match_parent"/>

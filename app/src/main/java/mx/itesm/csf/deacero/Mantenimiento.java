@@ -1,21 +1,40 @@
 package mx.itesm.csf.deacero;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,11 +46,18 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class Mantenimiento extends Fragment {
-    private LineChart mChart;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private final String TAG = "ListaDatos";
+    private final String EXTRA_JSON_OBJECT = "objetoAuto";
+    String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
+    private BarChart barChart;
+    private int[] datos;
+    private RequestQueue mQueue;
+    public static ArrayList<Integer> x = new ArrayList<>();
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,38 +100,46 @@ public class Mantenimiento extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_produccion, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mantenimiento, container, false);
 
         // Inflate the layout for this fragment
-        mChart = (LineChart) rootView.findViewById(R.id.chart);
-        //mChart.setOnChartValueSelectedListener(Menu_Graficas.this);
+        barChart = (BarChart) rootView.findViewById(R.id.barchart);
 
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(false);
+        Log.d("CREATION","AGAP");
 
-        ArrayList<Entry> yValues = new ArrayList<>();
+        final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
+        //barraDeProgreso.setMessage("Cargando datos...");
+        //barraDeProgreso.show();
 
-        yValues.add(new Entry(0,60));
-        yValues.add(new Entry(1,50));
-        yValues.add(new Entry(2,70));
-        yValues.add(new Entry(3,30));
-        yValues.add(new Entry(4,50));
-        yValues.add(new Entry(5,60));
-        yValues.add(new Entry(6,650));
-
-        LineDataSet set1 = new LineDataSet(yValues,"Data Set 1");
-
-        set1.setFillAlpha(110);
-
-        set1.setColor(Color.RED);
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+        final List<BarEntry> entries = new ArrayList<>();
 
 
-        LineData data = new LineData(dataSets);
+        // Anexamos el request a la cola
 
-        mChart.setData(data);
 
+
+        /*entries.add(new BarEntry(0, 30));
+        entries.add(new BarEntry(1, 80));
+        entries.add(new BarEntry(2, 60));
+        entries.add(new BarEntry(3, 50));
+        // gap of 2f
+        entries.add(new BarEntry(5, 70));
+        entries.add(new BarEntry(6, 60));
+        */
+
+        BarDataSet set = new BarDataSet(entries, "BarDataSet");
+
+
+        BarData data = new BarData(set);
+        data.setBarWidth(0.9f); // set custom bar width
+        barChart.setData(data);
+        barChart.setFitBars(true); // make the x-axis fit exactly all bars
+        barChart.invalidate(); // refresh
+
+        barChart.setData(data);
+
+
+        //mQueue.add(request);
         return rootView;
     }
 
@@ -147,4 +181,37 @@ public class Mantenimiento extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    public ArrayList<Integer> jsonParse(){
+        String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("Datos");
+
+                            for(int i = 0;i < jsonArray.length();i++){
+                                JSONObject dato = jsonArray.getJSONObject(i);
+                                int toneladas = dato.getInt("Toneladas");
+                                String fecha = dato.getString("Fecha");
+                                x.add(toneladas);
+                                //mTextViewResult.append(fecha + "," +String.valueOf(toneladas) + "\n\n");
+                            }
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                            
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        return x;
+        //mQueue.add(request);
+    }
+
+
 }
