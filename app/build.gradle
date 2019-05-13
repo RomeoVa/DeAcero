@@ -37,5 +37,7 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.+'
 
+    implementation 'com.android.volley:volley:1.1.1'
+
 
 }
