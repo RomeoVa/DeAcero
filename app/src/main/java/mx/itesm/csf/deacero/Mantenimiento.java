@@ -1,8 +1,9 @@
 package mx.itesm.csf.deacero;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,22 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,7 +49,7 @@ public class Mantenimiento extends Fragment {
     String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
     private BarChart barChart;
     private int[] datos;
-    private RequestQueue mQueue;
+    //private RequestQueue mQueue;
     public static ArrayList<Integer> x = new ArrayList<>();
 
 
@@ -105,6 +99,16 @@ public class Mantenimiento extends Fragment {
         // Inflate the layout for this fragment
         barChart = (BarChart) rootView.findViewById(R.id.barchart);
 
+        AlertDialog.Builder AlertaSimulada = new AlertDialog.Builder(getActivity());
+        AlertaSimulada.setTitle("Alerta").setMessage("Banda 3 requiere mantenimieno por alta temperatura.")
+                .setNeutralButton("Entendido",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }});
+        AlertDialog Alerta = AlertaSimulada.create();
+        Alerta.show();
+
+        Log.d("CREATION","AGAP");
 
         final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
         barraDeProgreso.setMessage("Cargando datos...");
