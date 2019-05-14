@@ -45,7 +45,7 @@ import java.util.List;
 
 public class Menu_Graficas extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Produccion.OnFragmentInteractionListener,Mantenimiento.OnFragmentInteractionListener,
-        Energia.OnFragmentInteractionListener,Inicio.OnFragmentInteractionListener {
+        Energia.OnFragmentInteractionListener,Inicio.OnFragmentInteractionListener,Simulacion.OnFragmentInteractionListener {
 
     private static final String TAG = "menu_graficas";
 
@@ -138,10 +138,9 @@ public class Menu_Graficas extends AppCompatActivity
             fragment = new Energia();
             FragmentoSeleccionado = true;
 
-        }else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        }else if (id == R.id.Simulacion) {
+            fragment = new Simulacion();
+            FragmentoSeleccionado = true;
         }
 
         if(FragmentoSeleccionado){

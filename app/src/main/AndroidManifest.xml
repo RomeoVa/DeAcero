@@ -3,7 +3,7 @@
     package="mx.itesm.csf.deacero">
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -11,26 +11,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <activity android:name=".Prueba"></activity>
-        <activity android:name=".Heavy4" />
-        <activity android:name=".Heavy3_4" />
-        <activity android:name=".Menos2Heavy" />
-        <activity android:name=".NoFerrosaLight" />
-        <activity android:name=".Mas2Heavy" />
-        <activity android:name=".FerrosaTramp" />
-        <activity android:name=".Principal" />
         <activity android:name=".Entrada" />
         <activity android:name=".Test" />
         <activity
             android:name=".Menu_Graficas"
             android:label="@string/title_activity_menu__graficas"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Splash"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Login"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".Splash"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

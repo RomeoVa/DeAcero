@@ -105,19 +105,48 @@ public class Mantenimiento extends Fragment {
         // Inflate the layout for this fragment
         barChart = (BarChart) rootView.findViewById(R.id.barchart);
 
-        Log.d("CREATION","AGAP");
 
         final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
-        //barraDeProgreso.setMessage("Cargando datos...");
-        //barraDeProgreso.show();
+        barraDeProgreso.setMessage("Cargando datos...");
+        barraDeProgreso.show();
 
-        final List<BarEntry> entries = new ArrayList<>();
+        JsonArrayRequest request = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("CREATION","AGAP");
+
+                        Log.d(TAG,response.toString());
+                        Log.d(TAG,"Tamano "+response.length());
+                        x = parserJSON.regresaTons(response);
+                        barraDeProgreso.hide();
+                        final List<BarEntry> entries = new ArrayList<>();
+                        for(int i = 0;i < x.size();i++){
+                            entries.add(new BarEntry(i, x.get(i)));
+
+                        }
+                        // creamos un adaptador personalizado para la lista de vehiculos
+                        BarDataSet set = new BarDataSet(entries, "BarDataSet");
 
 
-        // Anexamos el request a la cola
+                        BarData data = new BarData(set);
+                        data.setBarWidth(0.9f); // set custom bar width
+                        barChart.setData(data);
+                        barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                        barChart.invalidate(); // refresh
 
+                        barChart.setData(data);
 
+                    }
+                }, new Response.ErrorListener() {
 
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error en: " + error.getMessage());
+                // oculta la barra de progreso
+                barraDeProgreso.hide();
+            }
+        });
         /*entries.add(new BarEntry(0, 30));
         entries.add(new BarEntry(1, 80));
         entries.add(new BarEntry(2, 60));
@@ -126,18 +155,6 @@ public class Mantenimiento extends Fragment {
         entries.add(new BarEntry(5, 70));
         entries.add(new BarEntry(6, 60));
         */
-
-        BarDataSet set = new BarDataSet(entries, "BarDataSet");
-
-
-        BarData data = new BarData(set);
-        data.setBarWidth(0.9f); // set custom bar width
-        barChart.setData(data);
-        barChart.setFitBars(true); // make the x-axis fit exactly all bars
-        barChart.invalidate(); // refresh
-
-        barChart.setData(data);
-
 
         //mQueue.add(request);
         return rootView;
@@ -181,37 +198,7 @@ public class Mantenimiento extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public ArrayList<Integer> jsonParse(){
-        String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("Datos");
 
-                            for(int i = 0;i < jsonArray.length();i++){
-                                JSONObject dato = jsonArray.getJSONObject(i);
-                                int toneladas = dato.getInt("Toneladas");
-                                String fecha = dato.getString("Fecha");
-                                x.add(toneladas);
-                                //mTextViewResult.append(fecha + "," +String.valueOf(toneladas) + "\n\n");
-                            }
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                            
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        return x;
-        //mQueue.add(request);
-    }
 
 
 }

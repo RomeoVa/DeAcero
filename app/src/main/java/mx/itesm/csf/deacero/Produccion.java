@@ -1,12 +1,14 @@
 package mx.itesm.csf.deacero;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -31,6 +33,8 @@ public class Produccion extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Button botonEntrada,botonFerrosaTramp,botonHeavy3_4,botonHeavy4,botonMas2Heavy,
+            botonMenos2Heavy,botonNoFerrosaLight,botonPrincipal;
     //private LineChart mChart;
 
 
@@ -77,6 +81,98 @@ public class Produccion extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_produccion, container, false);
+        botonEntrada = (Button) rootView.findViewById(R.id.Entrada);
+        botonFerrosaTramp = (Button) rootView.findViewById(R.id.FerrosaTramp);
+        botonHeavy3_4 = (Button) rootView.findViewById(R.id.Heavy_3_4);
+        botonHeavy4 = (Button) rootView.findViewById(R.id.Heavy4);
+        botonMas2Heavy = (Button) rootView.findViewById(R.id.Mas2Heavy);
+        botonMenos2Heavy = (Button) rootView.findViewById(R.id.Menos2Heavy);
+        botonNoFerrosaLight = (Button) rootView.findViewById(R.id.NoFerrosaLight);
+        botonPrincipal = (Button) rootView.findViewById(R.id.Principal);
+
+        botonEntrada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Entrada");
+                i.putExtra("color", -1);
+                startActivity(i);
+            }
+        });
+
+        botonPrincipal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Principal");
+                i.putExtra("color", -167711681);
+                startActivity(i);
+            }
+        });
+
+        botonNoFerrosaLight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Non_Ferrous_Light");
+                i.putExtra("color", -16776961);
+                startActivity(i);
+            }
+        });
+
+        botonFerrosaTramp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Ferrous_Tramp");
+                i.putExtra("color", -16777216);
+                startActivity(i);
+            }
+        });
+
+        botonHeavy3_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Heavy_3_4");
+                i.putExtra("color", -65281);
+                startActivity(i);
+            }
+        });
+
+        botonHeavy4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Heavy_4");
+                i.putExtra("color", -256);
+                startActivity(i);
+            }
+        });
+
+        botonMas2Heavy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Plus2_Heavy");
+                i.putExtra("color", -65536);
+                startActivity(i);
+            }
+        });
+
+        botonMenos2Heavy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Entrada.class);
+                i.putExtra("tabla", "Heavy_2");
+                i.putExtra("color", -256);
+                startActivity(i);
+            }
+        });
+
+
+
+
 /*
         mChart = (LineChart) rootView.findViewById(R.id.chart);
         //mChart.setOnChartValueSelectedListener(Menu_Graficas.this);
