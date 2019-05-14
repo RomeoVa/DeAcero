@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -43,9 +46,9 @@ public class Mantenimiento extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private long tiempodeEspera = 3000; //milisegundos
     private static final String ARG_PARAM2 = "param2";
     private final String TAG = "ListaDatos";
-    private final String EXTRA_JSON_OBJECT = "objetoAuto";
     String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
     private BarChart barChart;
     private int[] datos;
@@ -99,6 +102,10 @@ public class Mantenimiento extends Fragment {
         // Inflate the layout for this fragment
         barChart = (BarChart) rootView.findViewById(R.id.barchart);
 
+
+
+
+
         AlertDialog.Builder AlertaSimulada = new AlertDialog.Builder(getActivity());
         AlertaSimulada.setTitle("Alerta").setMessage("Banda 3 requiere mantenimieno por alta temperatura.")
                 .setNeutralButton("Entendido",new DialogInterface.OnClickListener() {
@@ -107,13 +114,26 @@ public class Mantenimiento extends Fragment {
                     }});
         AlertDialog Alerta = AlertaSimulada.create();
         Alerta.show();
+        TimerTask tarea = new TimerTask() {
 
-        Log.d("CREATION","AGAP");
+            public void run() {
 
-        final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
-        barraDeProgreso.setMessage("Cargando datos...");
-        barraDeProgreso.show();
 
+                //Intent intentoPrincipal = new Intent().setClass(MainActivity.this, parseaJSON.class);
+                //startActivity(intentoPrincipal);
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(tarea, tiempodeEspera);
+
+
+
+        //Log.d("CREATION","AGAP");
+
+        //final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
+        //barraDeProgreso.setMessage("Cargando datos...");
+        //barraDeProgreso.show();
+       /*
         JsonArrayRequest request = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override

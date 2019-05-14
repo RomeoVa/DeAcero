@@ -2,13 +2,18 @@ package mx.itesm.csf.deacero;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.gc.materialdesign.views.ButtonRectangle;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -37,9 +43,9 @@ public class Entrada extends AppCompatActivity {
     public ArrayList<String> x = new ArrayList<>();
     private int[] numeros;
     int  dia,colord;
-    String tabla;
+    String tabla,titulo;
     private Spinner spinner1, spinner2;
-    private Button btnSubmit;
+    private ButtonRectangle btnSubmit;
     String f,mes,anio;
     String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.mes-anio.php?tabla=";
 
@@ -50,7 +56,9 @@ public class Entrada extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
         setContentView(R.layout.activity_test);
+
         tabla = intent.getStringExtra("tabla");
+        setTitle(tabla);
         colord = intent.getIntExtra("color",-256);
         url+=tabla;
         mTextViewResult = findViewById(R.id.text_view_result);
@@ -66,6 +74,7 @@ public class Entrada extends AppCompatActivity {
         //mTextViewResult.append((x.get(0)).toString() + "\n\n");
 
     }
+
 
     public void jsonParse(String uri,BarChart graf){
         final List<BarEntry> entries = new ArrayList<>();
@@ -149,7 +158,7 @@ public class Entrada extends AppCompatActivity {
 
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        btnSubmit = (ButtonRectangle) findViewById(R.id.btnSubmit);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
 

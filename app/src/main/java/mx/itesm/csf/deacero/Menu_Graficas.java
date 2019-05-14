@@ -124,10 +124,10 @@ public class Menu_Graficas extends AppCompatActivity
             fragment = new Produccion();
             FragmentoSeleccionado = true;
             // Handle the camera action
-            Toast toast1 = Toast.makeText(getApplicationContext(), "Prueba ASF", Toast.LENGTH_SHORT);
-            toast1.setGravity(Gravity.CENTER, 0,0 );
+            //Toast toast1 = Toast.makeText(getApplicationContext(), "Prueba ASF", Toast.LENGTH_SHORT);
+            //toast1.setGravity(Gravity.CENTER, 0,0 );
 
-            toast1.show();
+            //toast1.show();
         } else if (id == R.id.Mantenimiento) {
             fragment = new Mantenimiento();
             FragmentoSeleccionado = true;

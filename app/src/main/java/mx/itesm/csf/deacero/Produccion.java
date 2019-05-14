@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.gc.materialdesign.views.ButtonRectangle;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -33,7 +34,7 @@ public class Produccion extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Button botonEntrada,botonFerrosaTramp,botonHeavy3_4,botonHeavy4,botonMas2Heavy,
+    private ButtonRectangle botonEntrada,botonFerrosaTramp,botonHeavy3_4,botonHeavy4,botonMas2Heavy,
             botonMenos2Heavy,botonNoFerrosaLight,botonPrincipal;
     //private LineChart mChart;
 
@@ -81,21 +82,22 @@ public class Produccion extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_produccion, container, false);
-        botonEntrada = (Button) rootView.findViewById(R.id.Entrada);
-        botonFerrosaTramp = (Button) rootView.findViewById(R.id.FerrosaTramp);
-        botonHeavy3_4 = (Button) rootView.findViewById(R.id.Heavy_3_4);
-        botonHeavy4 = (Button) rootView.findViewById(R.id.Heavy4);
-        botonMas2Heavy = (Button) rootView.findViewById(R.id.Mas2Heavy);
-        botonMenos2Heavy = (Button) rootView.findViewById(R.id.Menos2Heavy);
-        botonNoFerrosaLight = (Button) rootView.findViewById(R.id.NoFerrosaLight);
-        botonPrincipal = (Button) rootView.findViewById(R.id.Principal);
+        botonEntrada = (ButtonRectangle) rootView.findViewById(R.id.Entrada);
+        botonFerrosaTramp = (ButtonRectangle) rootView.findViewById(R.id.FerrosaTramp);
+        botonHeavy3_4 = (ButtonRectangle) rootView.findViewById(R.id.Heavy_3_4);
+        botonHeavy4 = (ButtonRectangle) rootView.findViewById(R.id.Heavy4);
+        botonMas2Heavy = (ButtonRectangle) rootView.findViewById(R.id.Mas2Heavy);
+        botonMenos2Heavy = (ButtonRectangle) rootView.findViewById(R.id.Menos2Heavy);
+        botonNoFerrosaLight = (ButtonRectangle) rootView.findViewById(R.id.NoFerrosaLight);
+        botonPrincipal = (ButtonRectangle) rootView.findViewById(R.id.Principal);
 
         botonEntrada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), Entrada.class);
                 i.putExtra("tabla", "Entrada");
-                i.putExtra("color", -1);
+                i.putExtra("color", -12303292);
+                //i.putExtra("titulo","")
                 startActivity(i);
             }
         });
