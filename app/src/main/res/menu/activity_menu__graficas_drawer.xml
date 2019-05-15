@@ -25,6 +25,10 @@
             android:id="@+id/Simulacion"
             android:icon="@drawable/simu"
             android:title="Simulación" />
+        <item
+            android:id="@+id/Usuarios"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Usuarios" />
     </group>
 
 </menu>

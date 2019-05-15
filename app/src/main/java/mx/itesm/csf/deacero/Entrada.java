@@ -117,7 +117,6 @@ public class Entrada extends AppCompatActivity {
                             barChart.setFitBars(true); // make the x-axis fit exactly all bars
                             barChart.invalidate(); // refresh
 
-                            barChart.setData(data);
                             barChart.animateY(2000);
                             barChart.setDrawBarShadow(true);
 
