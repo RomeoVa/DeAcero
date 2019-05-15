@@ -17,6 +17,7 @@ public class parserJSON {
 
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
 
+
     // paseaObjeto toma in objeto JSON como un parÃ¡metro y establece
     // todos los atributos del objeto Auto.
     public static Trituradora parseaObjeto(JSONObject obj) {

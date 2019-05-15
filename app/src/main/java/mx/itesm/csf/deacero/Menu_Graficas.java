@@ -1,5 +1,6 @@
 package mx.itesm.csf.deacero;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -152,6 +153,8 @@ public class Menu_Graficas extends AppCompatActivity
             fragment = new Simulacion();
             FragmentoSeleccionado = true;
         }else if (id == R.id.Usuarios){
+            Intent intent = new Intent(getBaseContext(), ParseaArregloJSON.class);
+            startActivity(intent);
 
         }
 
