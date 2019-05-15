@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.itesm.csf.deacero">
-    <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Prueba"></activity>
+        <activity android:name=".NuevoUsuario"></activity>
+        <activity android:name=".ParseaObjetoArreglo" />
+        <activity android:name=".ParseaArregloJSON" />
+        <activity android:name=".Prueba" />
         <activity android:name=".Heavy4" />
         <activity android:name=".Heavy3_4" />
         <activity android:name=".Menos2Heavy" />
@@ -27,10 +30,10 @@
             android:label="@string/title_activity_menu__graficas"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Splash"
+            android:name=".Login"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".Login"
+            android:name=".Splash"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

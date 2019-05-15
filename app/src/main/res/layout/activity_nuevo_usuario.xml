@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NuevoUsuario">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="376dp"
+        android:layout_height="479dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/nombreTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Nombre" />
+
+        <EditText
+            android:id="@+id/NombreText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:autofillHints="@string/Nombre"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/paternoTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Appaterno" />
+
+        <EditText
+            android:id="@+id/AppaternoText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/maternoTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Apmaterno" />
+
+        <EditText
+            android:id="@+id/ApmaternoText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/usuarioTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Usuario" />
+
+        <EditText
+            android:id="@+id/UsuarioText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/contrasenaTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Contraseña" />
+
+        <EditText
+            android:id="@+id/PasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/privilegiosBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/Privilegios" />
+
+        <Button
+            android:id="@+id/anadirButton"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:layout_marginBottom="30dp"
+            android:onClick="crearUsuario"
+            android:text="@string/Anadir" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

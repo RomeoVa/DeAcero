@@ -23,4 +23,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Bienvenido">Bienvenid@</string>
+    <string name="Nombre">Nombre:</string>
+    <string name="Appaterno">A.paterno:</string>
+    <string name="Apmaterno">A.materno:</string>
+    <string name="Usuario">Usuario:</string>
+    <string name="Contraseña">Contraseña:</string>
+    <string name="Editar">Editar</string>
+    <string name="Borrar">Borrar</string>
+    <string name="Privilegios">Privilegios</string>
+    <string name="Anadir">Añadir</string>
 </resources>

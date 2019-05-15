@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class parserJSON {
 
     public static ArrayList<Trituradora> Datos = new ArrayList<>();
+    public static ArrayList<Usuario> Usuarios = new ArrayList<>();
 
     // paseaObjeto toma in objeto JSON como un parÃ¡metro y establece
     // todos los atributos del objeto Auto.
@@ -47,6 +48,39 @@ public class parserJSON {
                 Datos.add(trituradora);
             }
             return Datos;
+
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ArrayList<Usuario> parseaArregloUsuario(JSONArray arr) {
+
+        JSONObject obj=null;
+        JSONObject obj2=null;
+        Usuario usr = null;
+        Usuarios.clear();
+
+        try {
+            for(int i = 0;i<arr.length()/2;i++) {
+
+                obj = arr.getJSONObject(i);
+                obj2 = arr.getJSONObject(i+(arr.length()/2));
+                usr = new Usuario();
+
+                usr.setId(obj.getString("id_usuario"));
+                usr.setNombre(obj.getString("Nombre"));
+                usr.setAppaterno(obj.getString("Appaterno"));
+                usr.setApmaterno(obj.getString("Apmaterno"));
+                usr.setusuario(obj2.getString("Usuario"));
+                usr.setPassword(obj2.getString("Password"));
+                usr.setRol(obj2.getString("Rol"));
+
+
+                Usuarios.add(usr);
+            }
+            return Usuarios;
 
         } catch (JSONException e1) {
             e1.printStackTrace();

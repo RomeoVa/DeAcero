@@ -1,17 +1,20 @@
 package mx.itesm.csf.deacero;
+import java.io.Serializable;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
+    private String id;
     private String Nombre;
     private String Appaterno;
     private String Apmaterno;
-    private Long Edad;
-    private Long id_compania;
 
     private String usuario;
     private String password;
     private String Rol;
 
+    public String getId(){ return id; }
+
+    public void setId(String id){ this.id = id; }
 
     public String getNombre() {
         return Nombre;
@@ -35,22 +38,6 @@ public class Usuario {
 
     public void setApmaterno(String Apmaterno) {
         this.Apmaterno = Apmaterno;
-    }
-
-    public Long getEdad() {
-        return Edad;
-    }
-
-    public void setEdad(Long Edad) {
-        this.Edad = Edad;
-    }
-
-    public Long getid_compania() {
-        return id_compania;
-    }
-
-    public void setid_compania(Long id_compania) {
-        this.id_compania = id_compania;
     }
 
 
