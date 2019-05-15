@@ -20,76 +20,96 @@
     </com.github.mikephil.charting.charts.LineChart>
     -->
 
-    <Button
+
+    <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/Entrada"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="10dp"
         android:text="Entrada"
+        android:background="#d14a02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/FerrosaTramp"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginTop="180dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:background="#d14a02"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="510dp"
         android:text="FerrosaTramp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+
+    <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/Mas2Heavy"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginTop="360dp"
-        android:text="Mas2Heavy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:background="#000000"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginBottom="118dp"
+        android:text="Mas2Heavy" />
 
-    <Button
+    <com.gc.materialdesign.views.ButtonRectangle
+
         android:id="@+id/Heavy4"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginTop="540dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:layout_marginTop="735dp"
+        android:layout_marginStart="10dp"
+        android:background="#000000"
         android:text="Heavy4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
-    <Button
+    <com.gc.materialdesign.views.ButtonRectangle
+
         android:id="@+id/Principal"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginStart="212dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:background="#d14a02"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="60dp"
         android:text="Principal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.gc.materialdesign.views.ButtonRectangle
+
         android:id="@+id/NoFerrosaLight"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="176dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:layout_marginStart="300dp"
+        android:background="#000000"
+        android:layout_marginTop="285dp"
         android:text="NoFerrosaLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.gc.materialdesign.views.ButtonRectangle
+
         android:id="@+id/Menos2Heavy"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="360dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="510dp"
+        android:background="#d14a02"
         android:text="Menos2Heavy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.gc.materialdesign.views.ButtonRectangle
 
-    <Button
         android:id="@+id/Heavy_3_4"
-        android:layout_width="215dp"
-        android:layout_height="182dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="540dp"
+        android:layout_width="45mm"
+        android:layout_height="36mm"
+        android:background="#000000"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="735dp"
         android:text="3/4Heavy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -45,10 +45,11 @@ import java.util.List;
 
 public class Menu_Graficas extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Produccion.OnFragmentInteractionListener,Mantenimiento.OnFragmentInteractionListener,
-        Energia.OnFragmentInteractionListener,Inicio.OnFragmentInteractionListener {
+        Energia.OnFragmentInteractionListener,Inicio.OnFragmentInteractionListener,Simulacion.OnFragmentInteractionListener {
 
     private static final String TAG = "menu_graficas";
-
+    private MenuItem itemToHide;
+    private MenuItem itemToShow;
 
 
 
@@ -72,8 +73,13 @@ public class Menu_Graficas extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        invalidateOptionsMenu();
+
 
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -89,6 +95,10 @@ public class Menu_Graficas extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu__graficas, menu);
+        //getMenuInflater().inflate(R.menu.activity_menu__graficas_drawer, menu);
+        //itemToHide = menu.findItem(R.id.Usuarios);
+        //itemToHide.setVisible(false);
+        //itemToShow = menu.findItem(R.id.item_to_show);
         return true;
     }
 
@@ -124,10 +134,10 @@ public class Menu_Graficas extends AppCompatActivity
             fragment = new Produccion();
             FragmentoSeleccionado = true;
             // Handle the camera action
-            Toast toast1 = Toast.makeText(getApplicationContext(), "Prueba ASF", Toast.LENGTH_SHORT);
-            toast1.setGravity(Gravity.CENTER, 0,0 );
+            //Toast toast1 = Toast.makeText(getApplicationContext(), "Prueba ASF", Toast.LENGTH_SHORT);
+            //toast1.setGravity(Gravity.CENTER, 0,0 );
 
-            toast1.show();
+            //toast1.show();
         } else if (id == R.id.Mantenimiento) {
             fragment = new Mantenimiento();
             FragmentoSeleccionado = true;
@@ -138,9 +148,10 @@ public class Menu_Graficas extends AppCompatActivity
             fragment = new Energia();
             FragmentoSeleccionado = true;
 
-        }else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        }else if (id == R.id.Simulacion) {
+            fragment = new Simulacion();
+            FragmentoSeleccionado = true;
+        }else if (id == R.id.Usuarios){
 
         }
 

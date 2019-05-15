@@ -1,8 +1,10 @@
 package mx.itesm.csf.deacero;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,22 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -49,13 +46,13 @@ public class Mantenimiento extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private long tiempodeEspera = 3000; //milisegundos
     private static final String ARG_PARAM2 = "param2";
     private final String TAG = "ListaDatos";
-    private final String EXTRA_JSON_OBJECT = "objetoAuto";
     String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
     private BarChart barChart;
     private int[] datos;
-    private RequestQueue mQueue;
+    //private RequestQueue mQueue;
     public static ArrayList<Integer> x = new ArrayList<>();
 
 
@@ -105,19 +102,75 @@ public class Mantenimiento extends Fragment {
         // Inflate the layout for this fragment
         barChart = (BarChart) rootView.findViewById(R.id.barchart);
 
-        Log.d("CREATION","AGAP");
 
-        final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
+
+
+
+        AlertDialog.Builder AlertaSimulada = new AlertDialog.Builder(getActivity());
+        AlertaSimulada.setTitle("Alerta").setMessage("Banda 3 requiere mantenimieno por alta temperatura.")
+                .setNeutralButton("Entendido",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }});
+        AlertDialog Alerta = AlertaSimulada.create();
+        Alerta.show();
+        TimerTask tarea = new TimerTask() {
+
+            public void run() {
+
+
+                //Intent intentoPrincipal = new Intent().setClass(MainActivity.this, parseaJSON.class);
+                //startActivity(intentoPrincipal);
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(tarea, tiempodeEspera);
+
+
+
+        //Log.d("CREATION","AGAP");
+
+        //final ProgressDialog barraDeProgreso = new ProgressDialog(getActivity());
         //barraDeProgreso.setMessage("Cargando datos...");
         //barraDeProgreso.show();
+       /*
+        JsonArrayRequest request = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("CREATION","AGAP");
 
-        final List<BarEntry> entries = new ArrayList<>();
+                        Log.d(TAG,response.toString());
+                        Log.d(TAG,"Tamano "+response.length());
+                        x = parserJSON.regresaTons(response);
+                        barraDeProgreso.hide();
+                        final List<BarEntry> entries = new ArrayList<>();
+                        for(int i = 0;i < x.size();i++){
+                            entries.add(new BarEntry(i, x.get(i)));
+
+                        }
+                        // creamos un adaptador personalizado para la lista de vehiculos
+                        BarDataSet set = new BarDataSet(entries, "BarDataSet");
 
 
-        // Anexamos el request a la cola
+                        BarData data = new BarData(set);
+                        data.setBarWidth(0.9f); // set custom bar width
+                        barChart.setData(data);
+                        barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                        barChart.invalidate(); // refresh
 
+                        barChart.setData(data);
 
+                    }
+                }, new Response.ErrorListener() {
 
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error en: " + error.getMessage());
+                // oculta la barra de progreso
+                barraDeProgreso.hide();
+            }
+        });
         /*entries.add(new BarEntry(0, 30));
         entries.add(new BarEntry(1, 80));
         entries.add(new BarEntry(2, 60));
@@ -126,18 +179,6 @@ public class Mantenimiento extends Fragment {
         entries.add(new BarEntry(5, 70));
         entries.add(new BarEntry(6, 60));
         */
-
-        BarDataSet set = new BarDataSet(entries, "BarDataSet");
-
-
-        BarData data = new BarData(set);
-        data.setBarWidth(0.9f); // set custom bar width
-        barChart.setData(data);
-        barChart.setFitBars(true); // make the x-axis fit exactly all bars
-        barChart.invalidate(); // refresh
-
-        barChart.setData(data);
-
 
         //mQueue.add(request);
         return rootView;
@@ -181,37 +222,7 @@ public class Mantenimiento extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public ArrayList<Integer> jsonParse(){
-        String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.entrada.php";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("Datos");
 
-                            for(int i = 0;i < jsonArray.length();i++){
-                                JSONObject dato = jsonArray.getJSONObject(i);
-                                int toneladas = dato.getInt("Toneladas");
-                                String fecha = dato.getString("Fecha");
-                                x.add(toneladas);
-                                //mTextViewResult.append(fecha + "," +String.valueOf(toneladas) + "\n\n");
-                            }
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                            
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        return x;
-        //mQueue.add(request);
-    }
 
 
 }

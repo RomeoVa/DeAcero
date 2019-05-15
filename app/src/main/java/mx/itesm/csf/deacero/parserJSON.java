@@ -1,4 +1,9 @@
 package mx.itesm.csf.deacero;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +13,8 @@ import java.util.ArrayList;
 public class parserJSON {
 
     public static ArrayList<Trituradora> Datos = new ArrayList<>();
+    public static ArrayList<Integer> Tons = new ArrayList<>();
+
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
 
     // paseaObjeto toma in objeto JSON como un parÃ¡metro y establece
@@ -88,31 +95,34 @@ public class parserJSON {
         }
     }
 
-    public static int[] regresaTons(JSONArray arr) {
+    public static ArrayList<Integer> regresaTons(JSONArray arr) {
 
         JSONObject obj=null;
-        Trituradora trituradora = null;
-        Datos.clear();
-        int tons;
+        //Auto auto = null;
+        Tons.clear();
+        Integer tons;
 
         try {
-            int[] x = new int[arr.length()];
             for(int i = 0;i<arr.length();i++) {
 
                 obj = arr.getJSONObject(i);
-                trituradora = new Trituradora();
+                //auto = new Auto();
 
-                tons = (obj.getInt("Toneladas"));
-                trituradora.setFecha(obj.getString("Fecha"));
-
-                x[i] = tons;
-                //Datos.add(trituradora);
+                //auto.setMarca(obj.getString("Marca"));
+                //auto.setAuto(obj.getString("Auto"));
+                //auto.setimage(obj.getString("image"));
+                tons = obj.getInt("Toneladas");
+                Tons.add(tons);
             }
-            return x;
+            return Tons;
 
         } catch (JSONException e1) {
             e1.printStackTrace();
             return null;
         }
     }
+
+
+
+
 }
