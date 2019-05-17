@@ -1,6 +1,8 @@
 package mx.itesm.csf.deacero;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -64,6 +66,14 @@ public class Energia extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        AlertDialog.Builder AlertaSimulada = new AlertDialog.Builder(getActivity());
+        AlertaSimulada.setTitle("Alerta").setMessage("Salida Non-Fer Hi-Grade Light requiere mantenimieno por bajo votaje.")
+                .setNeutralButton("Entendido",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }});
+        AlertDialog Alerta = AlertaSimulada.create();
+        Alerta.show();
         return inflater.inflate(R.layout.fragment_energia, container, false);
     }
 

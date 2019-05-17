@@ -1,35 +1,18 @@
 package mx.itesm.csf.deacero;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -106,14 +89,6 @@ public class Mantenimiento extends Fragment {
 
 
 
-        AlertDialog.Builder AlertaSimulada = new AlertDialog.Builder(getActivity());
-        AlertaSimulada.setTitle("Alerta").setMessage("Banda 3 requiere mantenimieno por alta temperatura.")
-                .setNeutralButton("Entendido",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-                    }});
-        AlertDialog Alerta = AlertaSimulada.create();
-        Alerta.show();
         TimerTask tarea = new TimerTask() {
 
             public void run() {
@@ -126,7 +101,14 @@ public class Mantenimiento extends Fragment {
         Timer timer = new Timer();
         timer.schedule(tarea, tiempodeEspera);
 
-
+        AlertDialog.Builder AlertaSimulada = new AlertDialog.Builder(getActivity());
+        AlertaSimulada.setTitle("Alerta").setMessage("Salida Principal requiere mantenimieno por alta temperatura.")
+                .setNeutralButton("Entendido",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }});
+        AlertDialog Alerta = AlertaSimulada.create();
+        Alerta.show();
 
         //Log.d("CREATION","AGAP");
 
