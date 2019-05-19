@@ -68,7 +68,7 @@ public class ParseaObjetoArreglo extends AppCompatActivity {
         setContentView(R.layout.activity_parsea_objeto_arreglo);
 
         usuario = (Usuario) getIntent().getSerializableExtra(OBJETO_JSON_EXTRA);
-
+        setTitle("Usuario");
         nombreText = (EditText) findViewById(R.id.NombreText);
         appaternoText = (EditText) findViewById(R.id.AppaternoText);
         amaternaText = (EditText) findViewById(R.id.ApmaternoText);

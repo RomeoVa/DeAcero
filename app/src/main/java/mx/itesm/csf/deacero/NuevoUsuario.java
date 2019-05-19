@@ -53,7 +53,7 @@ public class NuevoUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_usuario);
-
+        setTitle("Usuario");
         nombreText = (EditText) findViewById(R.id.NombreText);
         appaternoText = (EditText) findViewById(R.id.AppaternoText);
         amaternaText = (EditText) findViewById(R.id.ApmaternoText);

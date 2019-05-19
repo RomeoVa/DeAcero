@@ -16,7 +16,7 @@ public class ParseaArregloJSON extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parsea_arreglo_json);
-
+        setTitle("Usuario");
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentoContenedor);
 

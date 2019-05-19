@@ -97,7 +97,7 @@ public class Menu_Graficas extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu__graficas, menu);
         //getMenuInflater().inflate(R.menu.activity_menu__graficas_drawer, menu);
-        //itemToHide = menu.findItem(R.id.Usuarios);
+        //itemToHide = menu.findItem(R.id.Produccion);
         //itemToHide.setVisible(false);
         //itemToShow = menu.findItem(R.id.item_to_show);
         return true;

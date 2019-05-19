@@ -1,8 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Principal">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Simulacion">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="773dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="46dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/barchart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Spinner
+            android:id="@+id/spinnerSim"
+            android:layout_width="156dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/country_arrays"
+            android:prompt="@string/country_prompt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/btnSubmit2"
+            android:layout_width="170dp"
+            android:layout_height="71dp"
+            android:layout_marginEnd="156dp"
+            android:background="#41D602"
+            android:text="Filtrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <com.github.mikephil.charting.charts.CombinedChart
         android:id="@+id/chart1"
-        android:layout_marginTop="100dp"
-        android:layout_width="848dp"
-        android:layout_height="970dp" />
+        android:layout_width="824dp"
+        android:layout_height="988dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp" />
 </RelativeLayout>

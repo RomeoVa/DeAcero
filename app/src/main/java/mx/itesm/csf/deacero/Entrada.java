@@ -108,7 +108,7 @@ public class Entrada extends AppCompatActivity {
                             }
 
                             BarDataSet set = new BarDataSet(entries, "Toneladas");
-
+                            barChart.getDescription().setText("Está dividido en días.");
                             BarData data = new BarData(set);
                             set.setColor(colord);
 

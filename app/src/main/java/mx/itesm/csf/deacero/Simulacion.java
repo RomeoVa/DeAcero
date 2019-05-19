@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.graphics.Color;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.gc.materialdesign.views.ButtonRectangle;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -28,7 +40,12 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -44,11 +61,22 @@ public class Simulacion extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ArrayList<Entry> entries = new ArrayList<>();
+    ArrayList<BarEntry> entries1 = new ArrayList<>();
+    private Spinner spinnerSimulacion;
+    private CombinedChart chart;
+    private ButtonRectangle btnSubmit;
+    String f,anio;
+    int  mes,colord;
+    private final int count = 12;
+    String url = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.simulacion.php?tabla=Simulacion";
+    String url2 = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.simulacion.php?tabla=Merma&anio=2019";
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private CombinedChart mChart;
 
     private OnFragmentInteractionListener mListener;
 
@@ -88,54 +116,176 @@ public class Simulacion extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_simulacion, container, false);
-        // Inflate the layout for this fragment
-        mChart = (CombinedChart) rootView.findViewById(R.id.chart1);
-        mChart.getDescription().setText("Esta es la descripciÃ³n");
-        mChart.setBackgroundColor(Color.WHITE);
-        mChart.setDrawGridBackground(true);
-        mChart.setDrawBarShadow(true);
-        mChart.setHighlightFullBarEnabled(true);
+        spinnerSimulacion = rootView.findViewById(R.id.spinnerSim);
+        btnSubmit = rootView.findViewById(R.id.btnSubmit2);
 
-        // dibuja las barras detrÃ¡s de lÃ­neas
-        mChart.setDrawOrder(new CombinedChart.DrawOrder[]{
-                CombinedChart.DrawOrder.BAR,  CombinedChart.DrawOrder.LINE
+        // Inflate the layout for this fragment
+        chart = rootView.findViewById(R.id.chart1);
+        chart.getDescription().setEnabled(false);
+        chart.setBackgroundColor(Color.WHITE);
+        chart.setDrawGridBackground(false);
+        chart.setDrawBarShadow(false);
+        chart.setHighlightFullBarEnabled(false);
+
+        // draw bars behind lines
+        chart.setDrawOrder(new CombinedChart.DrawOrder[]{
+                CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.BUBBLE, CombinedChart.DrawOrder.CANDLE, CombinedChart.DrawOrder.LINE, CombinedChart.DrawOrder.SCATTER
         });
 
-        Legend l = mChart.getLegend();
+        Legend l = chart.getLegend();
         l.setWordWrapEnabled(true);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
 
-        YAxis rightAxis = mChart.getAxisRight();
+        YAxis rightAxis = chart.getAxisRight();
         rightAxis.setDrawGridLines(false);
-        rightAxis.setAxisMinimum(0f); // esto reemplaza setStartAtZero(true)
+        rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
-        YAxis leftAxis = mChart.getAxisLeft();
+        YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setDrawGridLines(false);
-        leftAxis.setAxisMinimum(0f); // esto reemplaza setStartAtZero(true)
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        Simulacion(url);
+        addItemsOnSpinner2(spinnerSimulacion);
+        addListenerOnButton(spinnerSimulacion,btnSubmit);
 
-        XAxis xAxis = mChart.getXAxis();
+
+
+
+        return rootView;
+    }
+
+
+    public void Simulacion(String uri){
+
+        final XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
         xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return mMonths[(int) value % mMonths.length];
-            }
+
         });
 
-        CombinedData data = new CombinedData();
 
-        data.setData( generateLineData());
-        data.setData(generateBarData());
+        final CombinedData data = new CombinedData();
 
-        xAxis.setAxisMaximum(data.getXMax() + 0.25f);
-        mChart.setData(data);
-        mChart.invalidate();
-        return rootView;
+        final LineData d = new LineData();
+        final BarData b = new BarData();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            entries1.clear();
+                            entries.clear();
+                            JSONArray jsonArray = response.getJSONArray("Datos");
+                            //numeros = new int[jsonArray.length()];
+                            for(int i = 0;i < jsonArray.length();i++){
+                                JSONObject dato = jsonArray.getJSONObject(i);
+                                int produccion = dato.getInt("Produccion");
+                                int merma = dato.getInt("Merma");
+                                String fecha = dato.getString("Fecha");
+                                //f = fecha.substring(fecha.indexOf("-") + 1);
+                                f = fecha.substring(fecha.indexOf("-") + 1, fecha.lastIndexOf("-"));
+
+                                //f = fecha.substring(fecha.lastIndexOf("-") + 1);
+
+                                mes = Integer.parseInt(f);
+                                Log.d("Numerote",String.valueOf(mes));
+                                //numeros[i] = toneladas;
+                                entries.add(new Entry(mes, merma));
+                                entries1.add(new BarEntry(mes,produccion));
+
+                            }
+                            //Log.d("Listaantes",entries.toString());
+                            //Log.d("Lista",entries.toString());
+
+                            BarDataSet set1 = new BarDataSet(entries1, "Producción");
+                            set1.setColor(Color.rgb(60, 220, 78));
+                            set1.setValueTextColor(Color.rgb(60, 220, 78));
+                            set1.setValueTextSize(10f);
+                            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+                            final BarData b = new BarData(set1);
+
+
+                            LineDataSet set = new LineDataSet(entries, "Merma");
+                            set.setColor(Color.rgb(240, 238, 70));
+                            set.setLineWidth(2.5f);
+                            set.setCircleColor(Color.rgb(240, 238, 70));
+                            set.setCircleRadius(5f);
+                            set.setFillColor(Color.rgb(240, 238, 70));
+                            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                            set.setDrawValues(true);
+                            set.setValueTextSize(10f);
+                            set.setValueTextColor(Color.rgb(240, 238, 70));
+
+                            set.setAxisDependency(YAxis.AxisDependency.LEFT);
+                            d.addDataSet(set);
+                            data.setData(d);
+                            data.setData(b);
+                            xAxis.setAxisMaximum(data.getXMax() + 0.25f);
+
+                            chart.setData(data);
+                            chart.invalidate();
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+
     }
+
+    public void addItemsOnSpinner2(Spinner s) {
+        //View myFragmentView = inflater.inflate(R.layout.frag_cityhall, container, false);
+        //spinnerSimulacion = (Spinner) this.getView().findViewById(R.id.spinnerSim);
+        List<String> list = new ArrayList<String>();
+        list.add("2019");
+        list.add("2020");
+        list.add("2021");
+        list.add("2022");
+        list.add("2023");
+        list.add("2024");
+        list.add("2025");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(dataAdapter);
+    }
+
+
+    // get the selected dropdown list value
+    public void addListenerOnButton(Spinner s,ButtonRectangle b) {
+
+
+        spinnerSimulacion = s;
+        btnSubmit = b;
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                //mes = String.valueOf(spinner1.getSelectedItemPosition()+1);
+                anio =  String.valueOf(spinnerSimulacion.getSelectedItem());
+                url+="&anio="+anio;
+
+                Simulacion(url);
+            }
+
+        });
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -171,26 +321,54 @@ public class Simulacion extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-    protected String[] mMonths = new String[] {
-            "Jan", "Feb", "Mar", "Apr", "May", "June"
-    };
 
     private LineData generateLineData() {
-
         LineData d = new LineData();
 
-        ArrayList<Entry> entries = new ArrayList<Entry>();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("Datos");
+                            //numeros = new int[jsonArray.length()];
+                            for(int i = 0;i < jsonArray.length();i++){
+                                JSONObject dato = jsonArray.getJSONObject(i);
+                                int toneladas = dato.getInt("Toneladas");
+                                String fecha = dato.getString("Fecha");
+                                //f = fecha.substring(fecha.indexOf("-") + 1);
+                                //f = fecha.substring(fecha.indexOf("-") + 1, fecha.indexOf("-"));
 
-        entries = getLineEntriesData(entries);
+                                f = fecha.substring(fecha.lastIndexOf("-") + 1);
+                                Log.d("Numerote",String.valueOf(toneladas));
+                                mes = Integer.parseInt(f);
+                                //numeros[i] = toneladas;
+                                entries.add(new Entry(i, toneladas));
 
-        LineDataSet set = new LineDataSet(entries, "Line");
-        //set.setColor(Color.rgb(240, 238, 70));
-        set.setColors(ColorTemplate.COLORFUL_COLORS);
+                            }
+                            Log.d("Listaantes",entries.toString());
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+
+       // for (int index = 0; index < count; index++)
+         //   entries.add(new Entry(index + 0.5f, 15));
+        Log.d("Lista",entries.toString());
+
+
+        LineDataSet set = new LineDataSet(entries, "Merma");
+        set.setColor(Color.rgb(240, 238, 70));
         set.setLineWidth(2.5f);
         set.setCircleColor(Color.rgb(240, 238, 70));
         set.setCircleRadius(5f);
@@ -203,48 +381,55 @@ public class Simulacion extends Fragment {
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
         d.addDataSet(set);
 
+
         return d;
-    }
 
-    private ArrayList<Entry> getLineEntriesData(ArrayList<Entry> entries){
-        entries.add(new Entry(1, 20));
-        entries.add(new Entry(2, 10));
-        entries.add(new Entry(3, 8));
-        entries.add(new Entry(4, 40));
-        entries.add(new Entry(5, 37));
 
-        return entries;
     }
 
     private BarData generateBarData() {
 
-        ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
-        entries = getBarEnteries(entries);
+        ArrayList<BarEntry> entries1 = new ArrayList<>();
+        ArrayList<BarEntry> entries2 = new ArrayList<>();
 
-        BarDataSet set1 = new BarDataSet(entries, "Bar");
-        //set1.setColor(Color.rgb(60, 220, 78));
-        set1.setColors(ColorTemplate.COLORFUL_COLORS);
+        for (int index = 0; index < count; index++) {
+            entries1.add(new BarEntry(index, index));
+
+            // stacked
+            entries2.add(new BarEntry(index+1, index +1));
+        }
+
+        BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
+        set1.setColor(Color.rgb(60, 220, 78));
         set1.setValueTextColor(Color.rgb(60, 220, 78));
         set1.setValueTextSize(10f);
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-        float barWidth = 0.45f; // x2 dataset
+        BarDataSet set2 = new BarDataSet(entries2, "");
+        set2.setStackLabels(new String[]{"Stack 1", "Stack 2"});
+        set2.setColors(Color.rgb(61, 165, 255), Color.rgb(23, 197, 255));
+        set2.setValueTextColor(Color.rgb(61, 165, 255));
+        set2.setValueTextSize(10f);
+        set2.setAxisDependency(YAxis.AxisDependency.LEFT);
 
+        float groupSpace = 0.06f;
+        float barSpace = 0.02f; // x2 dataset
+        float barWidth = 0.45f; // x2 dataset
+        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
         BarData d = new BarData(set1);
         d.setBarWidth(barWidth);
 
+        // make this BarData object grouped
+        //d.groupBars(0, groupSpace, barSpace); // start at x = 0
 
         return d;
     }
-
-    private ArrayList<BarEntry> getBarEnteries(ArrayList<BarEntry> entries){
-        entries.add(new BarEntry(1, 25));
-        entries.add(new BarEntry(2, 30));
-        entries.add(new BarEntry(3, 38));
-        entries.add(new BarEntry(4, 10));
-        entries.add(new BarEntry(5, 15));
-        return  entries;
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
+
+
 
 }
