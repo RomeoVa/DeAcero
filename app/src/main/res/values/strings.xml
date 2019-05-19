@@ -50,4 +50,12 @@
     <string name="Borrar">Borrar</string>
     <string name="Privilegios">Privilegios</string>
     <string name="Anadir">Añadir</string>
+    <string name="Entrada">Entrada</string>
+    <string name="Principal">Principal</string>
+    <string name="Mas2Heavy">Mas2Heavy</string>
+    <string name="NoFerrosaLight">NoFerrosaLight</string>
+    <string name="FerrosaTramp">FerrosaTramp</string>
+    <string name="Menos2Heavy">Menos2Heavy</string>
+    <string name="Heavy4">Heavy4</string>
+    <string name="Heavy_3_4">Heavy_3_4</string>
 </resources>
