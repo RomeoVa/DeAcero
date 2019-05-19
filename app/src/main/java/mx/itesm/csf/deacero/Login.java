@@ -76,13 +76,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     //Log.d(TAG,response.toString());
 
                     if (codigo_autenticacion.equals("01")) {
+                        JSONObject username2 = (JSONObject) response.get(1);
                         JSONObject username = (JSONObject) response.get(2);
+
 
                         datosUsuario.getInstance().setNombre(username.getString("Nombre").toString());
                         datosUsuario.getInstance().setAppaterno(username.getString("Appaterno").toString());
                         datosUsuario.getInstance().setApmaterno(username.getString("Apmaterno").toString());
                         datosUsuario.getInstance().setusuario(usuario);
                         datosUsuario.getInstance().setPassword(password);
+                        datosUsuario.getInstance().setRol(username2.getString("Rol"));
 
                         Toast.makeText(Login.this,
                                 "Bienvenido " + username.getString("Nombre").toString(), Toast.LENGTH_LONG).show();

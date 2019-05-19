@@ -52,6 +52,8 @@ public class Menu_Graficas extends AppCompatActivity
     private MenuItem itemToHide;
     private MenuItem itemToShow;
 
+    NavigationView navigationView;
+    private Usuario datosUsuario;
 
 
     @Override
@@ -75,6 +77,11 @@ public class Menu_Graficas extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         invalidateOptionsMenu();
+
+        if(!datosUsuario.getInstance().getRol().equals("Administrador"))
+        {
+            hideItem();
+        }
 
 
     }
@@ -169,5 +176,12 @@ public class Menu_Graficas extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    private void hideItem()
+    {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.Usuarios).setVisible(false);
     }
 }

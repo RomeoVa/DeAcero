@@ -3,6 +3,7 @@ package mx.itesm.csf.deacero;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -64,79 +65,100 @@ public class NuevoUsuario extends AppCompatActivity {
 
     public void crearUsuario(View v){
 
-        final ProgressDialog barraDeProgreso = new ProgressDialog(NuevoUsuario.this);
-        barraDeProgreso.setMessage("Añadiendo...");
-        barraDeProgreso.show();
 
-        SERVICIO_Create = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.crear.usuario.php?";
+        if(TextUtils.isEmpty(nombreText.getText().toString()) ||
+                TextUtils.isEmpty(appaternoText.getText().toString()) ||
+                TextUtils.isEmpty(amaternaText.getText().toString()) ||
+                TextUtils.isEmpty(usuarioText.getText().toString()) ||
+                TextUtils.isEmpty(passwordText.getText().toString()))
+        {
+            Toast.makeText(this, "Favor de llenar todos los campos ", Toast.LENGTH_SHORT).show();
 
-        nombre = nombreText.getText().toString().trim();
-        appaterno = appaternoText.getText().toString().trim();
-        apmaterno = amaternaText.getText().toString().trim();
-        usuario2 = usuarioText.getText().toString().trim();
-        password = passwordText.getText().toString().trim();
+        }else {
 
-        if(privilegios.isChecked()){
-            privilegiosText = "Administrador";
-        }else privilegiosText = "Empleado";
+            final ProgressDialog barraDeProgreso = new ProgressDialog(NuevoUsuario.this);
+            barraDeProgreso.setMessage("Añadiendo...");
+            barraDeProgreso.show();
 
-        SERVICIO_Create = SERVICIO_Create +
+            SERVICIO_Create = "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios/servicio.crear.usuario.php?";
 
-                NOMBRE + "=" + nombre + "&" +
-                APPATERNO + "=" + appaterno + "&" +
-                APMATERNO + "=" + apmaterno + "&" +
-                USUARIO + "=" + usuario2 + "&" +
-                PASSWORD + "=" + password + "&" +
-                ROL + "=" + privilegiosText.trim();
+            nombre = nombreText.getText().toString().trim();
+            appaterno = appaternoText.getText().toString().trim();
+            apmaterno = amaternaText.getText().toString().trim();
+            usuario2 = usuarioText.getText().toString().trim();
+            password = passwordText.getText().toString().trim();
 
-        JsonArrayRequest peticion = new JsonArrayRequest(SERVICIO_Create, new Response.Listener<JSONArray>() {
-            @Override public void onResponse(JSONArray response) {
-                barraDeProgreso.hide();
-                try {
-                    JSONObject autenticacion = (JSONObject) response.get(0);
-                    String codigo_autenticacion = autenticacion.getString("Codigo").toString();
-                    //Log.d(TAG,response.toString());
+            if (privilegios.isChecked()) {
+                privilegiosText = "Administrador";
+            } else privilegiosText = "Empleado";
 
-                    if (codigo_autenticacion.equals("01")) {
 
-                        Toast.makeText(NuevoUsuario.this,
-                                "Usuario añadido", Toast.LENGTH_LONG).show();
+            SERVICIO_Create = SERVICIO_Create +
 
+                    NOMBRE + "=" + nombre + "&" +
+                    APPATERNO + "=" + appaterno + "&" +
+                    APMATERNO + "=" + apmaterno + "&" +
+                    USUARIO + "=" + usuario2 + "&" +
+                    PASSWORD + "=" + password + "&" +
+                    ROL + "=" + privilegiosText.trim();
+
+            JsonArrayRequest peticion = new JsonArrayRequest(SERVICIO_Create, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    barraDeProgreso.hide();
+                    try {
+                        JSONObject autenticacion = (JSONObject) response.get(0);
+                        String codigo_autenticacion = autenticacion.getString("Codigo").toString();
+                        //Log.d(TAG,response.toString());
+
+                        if (codigo_autenticacion.equals("01")) {
+
+                            Toast.makeText(NuevoUsuario.this,
+                                    "Usuario añadido", Toast.LENGTH_LONG).show();
+
+                        }else if(codigo_autenticacion.equals("08")){
+                            Toast.makeText(NuevoUsuario.this,
+                                    "Ya existe este usuario", Toast.LENGTH_LONG).show();
+
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(NuevoUsuario.this, "Problema en: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    Toast.makeText(NuevoUsuario.this, "Problema en: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override public void onErrorResponse(VolleyError error) {
-                barraDeProgreso.hide();
-                Toast.makeText(NuevoUsuario.this, "Error en: " + error.toString(), Toast.LENGTH_LONG).show();
-            }
-        }) {
-            @Override protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put(NOMBRE, nombre);
-                map.put(APPATERNO, appaterno);
-                map.put(APMATERNO, apmaterno);
-                map.put(USUARIO, usuario2);
-                map.put(PASSWORD, password);
-                map.put(ROL, privilegiosText.trim());
-                return map;
-            }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    barraDeProgreso.hide();
+                    Toast.makeText(NuevoUsuario.this, "Error en: " + error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put(NOMBRE, nombre);
+                    map.put(APPATERNO, appaterno);
+                    map.put(APMATERNO, apmaterno);
+                    map.put(USUARIO, usuario2);
+                    map.put(PASSWORD, password);
+                    map.put(ROL, privilegiosText.trim());
+                    return map;
+                }
 
-            @Override public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                String credentiales = usuario2 + ":" + password;
-                String autenticacion = "Basic " + Base64.encodeToString(credentiales.getBytes(), Base64.NO_WRAP);
-                headers.put("Content-Type", "application/json");
-                headers.put("Authorization", autenticacion);
-                return headers;
-            }
-        };
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String credentiales = usuario2 + ":" + password;
+                    String autenticacion = "Basic " + Base64.encodeToString(credentiales.getBytes(), Base64.NO_WRAP);
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", autenticacion);
+                    return headers;
+                }
+            };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(peticion);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(peticion);
+        }
 
 
     }
