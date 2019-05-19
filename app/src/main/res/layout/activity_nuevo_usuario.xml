@@ -93,11 +93,14 @@
             android:layout_marginBottom="15dp"
             android:text="@string/Privilegios" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/anadirButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="83dp"
             android:layout_marginBottom="30dp"
+            android:background="@color/colorAccent"
+            android:textAllCaps="true"
             android:onClick="crearUsuario"
             android:text="@string/Anadir" />
 
