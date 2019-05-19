@@ -1,6 +1,8 @@
 package mx.itesm.csf.deacero;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -39,6 +42,8 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.EntryXComparator;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +56,7 @@ public class Menu_Graficas extends AppCompatActivity
     private static final String TAG = "menu_graficas";
     private MenuItem itemToHide;
     private MenuItem itemToShow;
+    String user,nombre;
 
     NavigationView navigationView;
     private Usuario datosUsuario;
@@ -61,6 +67,7 @@ public class Menu_Graficas extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_menu__graficas);
+        final Intent intent = getIntent();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.Contenedor, new Inicio())
@@ -77,6 +84,18 @@ public class Menu_Graficas extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         invalidateOptionsMenu();
+        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+
+        nombre = preferences.getString("nombre","No hay información");
+        user = preferences.getString("user","No hay información");
+        NavigationView navigationView1 = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navNombre = (TextView) headerView.findViewById(R.id.Nombre);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.Usuario);
+        navUsername.setText(user);
+        navNombre.setText(nombre);
+
 
         if(!datosUsuario.getInstance().getRol().equals("Administrador"))
         {

@@ -1,7 +1,10 @@
 package mx.itesm.csf.deacero;
 
 import android.app.ProgressDialog;
+import android.content.ContentProvider;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -86,6 +89,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         datosUsuario.getInstance().setusuario(usuario);
                         datosUsuario.getInstance().setPassword(password);
                         datosUsuario.getInstance().setRol(username2.getString("Rol"));
+
+                        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                        String nombre =username.getString("Nombre") + " "+ username.getString("Appaterno");
+                        String user = usuario;
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("nombre",nombre);
+                        editor.putString("user",user);
+                        editor.commit();
 
                         Toast.makeText(Login.this,
                                 "Bienvenido " + username.getString("Nombre").toString(), Toast.LENGTH_LONG).show();
