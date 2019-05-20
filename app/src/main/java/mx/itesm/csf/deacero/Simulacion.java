@@ -228,6 +228,7 @@ public class Simulacion extends Fragment {
                             xAxis.setAxisMaximum(data.getXMax() + 0.25f);
 
                             chart.setData(data);
+                            chart.animateY(2000);
                             chart.invalidate();
 
 
