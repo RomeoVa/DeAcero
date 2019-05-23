@@ -50,12 +50,13 @@
     <string name="Borrar">Borrar</string>
     <string name="Privilegios">Privilegios</string>
     <string name="Anadir">Añadir</string>
-    <string name="Entrada">Entrada</string>
-    <string name="Principal">Principal</string>
-    <string name="Mas2Heavy">Mas2Heavy</string>
-    <string name="NoFerrosaLight">NoFerrosaLight</string>
-    <string name="FerrosaTramp">FerrosaTramp</string>
-    <string name="Menos2Heavy">Menos2Heavy</string>
-    <string name="Heavy4">Heavy4</string>
-    <string name="Heavy_3_4">Heavy_3_4</string>
+    <string name="Entrada">Entrada Principal</string>
+    <string name="Principal">Salida Principal</string>
+    <string name="Mas2Heavy">+2 NON-FE HEAVY</string>
+    <string name="NoFerrosaLight">NON-FE HI-GRADE LIGHT</string>
+    <string name="FerrosaTramp">FERROUS TRAMP</string>
+    <string name="Menos2Heavy">_2 NON-FE HEAVY</string>
+    <string name="Heavy4">_4 NON-FE HEAVY</string>
+    <string name="Heavy_3_4">3/4 NON-FE HEAVY</string>
+    <string name="TrituradoraImg">Trituradora</string>
 </resources>

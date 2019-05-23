@@ -4,6 +4,7 @@ import java.io.Serializable;
 public class Usuario implements Serializable {
 
     private String id;
+    private String indice;
     private String Nombre;
     private String Appaterno;
     private String Apmaterno;
@@ -15,6 +16,10 @@ public class Usuario implements Serializable {
     public String getId(){ return id; }
 
     public void setId(String id){ this.id = id; }
+
+    public String getIndice(){ return indice; }
+
+    public void setIndice(String indice){ this.indice = indice; }
 
     public String getNombre() {
         return Nombre;

@@ -93,7 +93,7 @@ public class Lista_Usuario extends ListFragment {
 
 
             TextView nameTextView = (TextView) convertView.findViewById(R.id.textview_nombre);
-            usrTxt = c.getId()+". " +c.getNombre()+" "+c.getAppaterno()+" "+c.getApmaterno()+" - "+c.getusuario();
+            usrTxt = c.getIndice()+". " +c.getNombre()+" "+c.getAppaterno()+" "+c.getApmaterno()+" - "+c.getusuario();
             nameTextView.setText(usrTxt);
 
             nameTextView.setOnClickListener(new View.OnClickListener() {

@@ -78,6 +78,7 @@ public class parserJSON {
                 usr = new Usuario();
 
                 usr.setId(obj.getString("id_usuario"));
+                usr.setIndice(String.valueOf(i+1));
                 usr.setNombre(obj.getString("Nombre"));
                 usr.setAppaterno(obj.getString("Appaterno"));
                 usr.setApmaterno(obj.getString("Apmaterno"));
